@@ -1,7 +1,5 @@
 package edu.pnu.dao;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,13 +7,19 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.sql.DataSource;
+
 import org.springframework.stereotype.Repository;
 
 import edu.pnu.domain.MemberVO;
+import lombok.RequiredArgsConstructor;
 
+@RequiredArgsConstructor
 @Repository
 public class MemberDao {
-	Connection con;
+	
+	private final DataSource dataSource;
+	/*Connection con;
 	
 	PreparedStatement psmt;
 	
@@ -26,11 +30,11 @@ public class MemberDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
+	}*/
 	//Read All
 	public List<MemberVO> getMembers() throws SQLException{
 		List<MemberVO> memberList = new ArrayList<>();
-		Statement st=con.createStatement();
+		Statement st=dataSource.getConnection().createStatement();
 		ResultSet rs;
 		try {
 			rs=st.executeQuery("select * from member");
@@ -55,7 +59,7 @@ public class MemberDao {
 	public MemberVO getMember(Integer id) throws SQLException {
 		MemberVO m=null;
 		String query="select * from member where id=?";
-		PreparedStatement psmt = con.prepareStatement(query);
+		PreparedStatement psmt = dataSource.getConnection().prepareStatement(query);
 		psmt.setInt(1, id);
 		ResultSet rs=psmt.executeQuery();
 		
@@ -72,7 +76,7 @@ public class MemberDao {
 	}
 	//Update
 	public int updateMethod(MemberVO memberVO) throws SQLException {
-		Statement st =con.createStatement();
+		Statement st =dataSource.getConnection().createStatement();
 		String str;
 		if(getMember(memberVO.getId())==null)
 			return 0;
@@ -92,7 +96,7 @@ public class MemberDao {
 	//Delete
 	public int deleteMethod(Integer id) throws SQLException {
 		String del="delete from member where id=?";
-		PreparedStatement psmt = con.prepareStatement(del);
+		PreparedStatement psmt = dataSource.getConnection().prepareStatement(del);
 		psmt.setInt(1, id);
 		int result=psmt.executeUpdate();
 		
@@ -102,7 +106,7 @@ public class MemberDao {
 	//Insert
 	public int insertMethod(MemberVO memberVO) throws SQLException{
 		String insert="insert into member (name,pass) values (?,?)";
-		PreparedStatement psmt=con.prepareStatement(insert);
+		PreparedStatement psmt=dataSource.getConnection().prepareStatement(insert);
 		psmt.setString(1, memberVO.getName());
 		psmt.setString(2, memberVO.getPass());
 		psmt.executeUpdate();

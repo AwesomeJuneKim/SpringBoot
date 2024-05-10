@@ -26,8 +26,8 @@ public class MemberController {
 		//ms= new MemberService();
 		//ms.setMemberDao(new MemberDao());
 	}*/
-	/*@Autowired
-	public MemberController(MemberService ms) {
+	//@Autowired
+	/*public MemberController(MemberService ms) {
 		this.ms=ms;
 		System.out.println("MemberController works");
 	}*/

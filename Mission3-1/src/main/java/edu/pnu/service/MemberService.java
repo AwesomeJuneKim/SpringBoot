@@ -8,11 +8,13 @@ import org.springframework.stereotype.Service;
 
 import edu.pnu.dao.MemberDao;
 import edu.pnu.domain.MemberVO;
+import lombok.RequiredArgsConstructor;
+@RequiredArgsConstructor
 @Service
 public class MemberService {
-	@Autowired
-	private MemberDao dao;
-	public MemberService() {
+	//@Autowired
+	private final MemberDao dao;
+	/*public MemberService() {
 		System.out.println("makes Service");
 	}
 	/*public void setMemberDao(MemberDao dao) {
