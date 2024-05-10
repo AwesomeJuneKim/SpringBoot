@@ -1,0 +1,52 @@
+package edu.pnu.controller;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import edu.pnu.domain.MemberVO;
+
+
+@RestController
+public class MemberController {
+	List<MemberVO> memberList;
+	public MemberController() {
+		
+		memberList = new ArrayList<MemberVO>();
+		for(int i=1; i<=10;i++) {
+//			MemberVO member = new MemberVO();
+//			member.setId(i);
+//			member.setPass("pass"+i);
+//			member.setName("Tester"+i);
+//			member.setRegidate(new Date());
+//			memberList.add(member);
+			
+			//빌더 방식으로 객체 만드는 방법
+			memberList.add(MemberVO.builder()
+					.id(i)
+					.name("name"+i)
+					.pass("pass"+i)
+					.regidate(new Date())
+					.build());
+		}
+	}
+	@GetMapping("/members")
+	public List<MemberVO> getMembers() {
+		return memberList;
+		
+	}
+	@GetMapping("/member")
+	public MemberVO getMember(Integer id) {
+		for(MemberVO member : memberList) {
+			if(member.getId()==id) {
+				return member;
+			} 
+		}
+		return null;
+		
+	}
+	
+}

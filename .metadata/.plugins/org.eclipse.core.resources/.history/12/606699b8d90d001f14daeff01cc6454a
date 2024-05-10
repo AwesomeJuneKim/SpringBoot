@@ -1,0 +1,11 @@
+package edu.pnu.service;
+
+import edu.pnu.dao.MemberDao;
+
+public class MemberService {
+	private MemberDao dao;
+	public MemberService() {
+		dao= new MemberDao();
+	}
+	public List<MemberVO> getMembers(){
+}
