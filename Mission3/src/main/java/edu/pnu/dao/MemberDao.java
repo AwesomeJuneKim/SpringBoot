@@ -9,13 +9,15 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
 import edu.pnu.domain.MemberVO;
 
+@Component
 public class MemberDao {
 	Connection con;
 	
 	PreparedStatement psmt;
-	
 	public MemberDao() {
 		try {
 			con=DriverManager.getConnection("jdbc:h2:tcp://localhost/~/.h2/sqlprg","sa","abcd");
