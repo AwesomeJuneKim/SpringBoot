@@ -3,14 +3,17 @@ package edu.pnu.service;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import edu.pnu.dao.MemberDao;
 import edu.pnu.domain.MemberVO;
 
+@Service
 public class MemberService {
+	@Autowired
 	MemberDao dao;
-	public MemberService() {
-		dao= new MemberDao();
-	}
+	
 	public List<MemberVO> getMembers() throws SQLException{
 		return dao.getMembers();
 	}

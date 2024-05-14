@@ -3,6 +3,7 @@ package edu.pnu.controller;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,11 +14,8 @@ import edu.pnu.domain.MemberVO;
 import edu.pnu.service.MemberService;
 @RestController
 public class MemberController {
+	@Autowired
 	private MemberService ms;
-	
-	public MemberController() {
-		ms= new MemberService();
-	}
 	@GetMapping("/members")
 	public List<MemberVO> getMembers(MemberVO memberVO) throws SQLException{
 		return ms.getMembers();
