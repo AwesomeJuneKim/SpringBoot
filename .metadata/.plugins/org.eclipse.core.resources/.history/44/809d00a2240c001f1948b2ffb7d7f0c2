@@ -1,9 +1,0 @@
-package edu.pnu.controller;
-
-import java.util.HashMap;
-
-import edu.pnu.domain.MemberVO;
-
-public class MemberController {
-	HashMap<MemberVO> memberList;
-}
