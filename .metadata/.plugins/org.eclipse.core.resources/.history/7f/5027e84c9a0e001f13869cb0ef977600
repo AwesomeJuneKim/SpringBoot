@@ -1,7 +1,0 @@
-package com.ruby;
-
-public class TestService {
-	public TestService() {
-		System.out.println("TestService");
-	}
-}
